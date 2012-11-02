@@ -1,0 +1,221 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the custom install profile.
+ *
+ * Created by: Topsitemakers
+ * http://www.topsitemakers.com/
+ */
+
+/**
+ * Implements hook_install().
+ */
+function custom_install() {
+
+  // Enable some standard blocks.
+  $admin_theme = 'rubik';
+  $default_theme = variable_get('theme_default', 'bartik');
+  $blocks = array(
+    array(
+      'module' => 'system',
+      'delta' => 'main',
+      'theme' => $default_theme,
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'content',
+      'pages' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'user',
+      'delta' => 'login',
+      'theme' => $default_theme,
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'sidebar_first',
+      'pages' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'system',
+      'delta' => 'help',
+      'theme' => $default_theme,
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'help',
+      'pages' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'system',
+      'delta' => 'main',
+      'theme' => $admin_theme,
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'content',
+      'pages' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'system',
+      'delta' => 'help',
+      'theme' => $admin_theme,
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'help',
+      'pages' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'user',
+      'delta' => 'login',
+      'theme' => $admin_theme,
+      'status' => 1,
+      'weight' => 10,
+      'region' => 'content',
+      'pages' => '',
+      'cache' => -1,
+    ),
+  );
+  $query = db_insert('block')->fields(array('module', 'delta', 'theme', 'status', 'weight', 'region', 'pages', 'cache'));
+  foreach ($blocks as $block) {
+    $query->values($block);
+  }
+  $query->execute();
+
+  // Insert default pre-defined node types into the database. For a complete
+  // list of available node type attributes, refer to the node type API
+  // documentation at: http://api.drupal.org/api/HEAD/function/hook_node_info.
+  $types = array(
+    array(
+      'type' => 'page',
+      'name' => st('Page'),
+      'base' => 'node_content',
+      'description' => st("Use <em>pages</em> for your static content, such as an 'About us' page."),
+      'custom' => 1,
+      'modified' => 1,
+      'locked' => 0,
+    ),
+  );
+
+  foreach ($types as $type) {
+    $type = node_type_set_defaults($type);
+    node_type_save($type);
+    node_add_body_field($type);
+  }
+
+  // Default "Basic page" to not be promoted and have comments disabled.
+  variable_set('node_options_page', array('status'));
+  variable_set('comment_page', COMMENT_NODE_HIDDEN);
+
+  // Don't display date and author information for "Basic page" nodes by default.
+  variable_set('node_submitted_page', FALSE);
+
+  // Enable user picture support and set the default to a square thumbnail option.
+  variable_set('user_pictures', '1');
+  variable_set('user_picture_dimensions', '1024x1024');
+  variable_set('user_picture_file_size', '800');
+  variable_set('user_picture_style', 'thumbnail');
+
+  // Allow visitor account creation with administrative approval.
+  variable_set('user_register', USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL);
+
+  // Create a default role for site administrators, with all available permissions assigned.
+  $admin_role = new stdClass();
+  $admin_role->name = 'administrator';
+  $admin_role->weight = 2;
+  user_role_save($admin_role);
+  user_role_grant_permissions($admin_role->rid, array_keys(module_invoke_all('permission')));
+  // Set this as the administrator role.
+  variable_set('user_admin_role', $admin_role->rid);
+
+  // Assign user 1 the "administrator" role.
+  db_insert('users_roles')
+    ->fields(array('uid' => 1, 'rid' => $admin_role->rid))
+    ->execute();
+
+  // Allow anonymous and registered users to access content
+  user_role_grant_permissions(1, array('access content'));
+  user_role_grant_permissions(2, array('access content'));
+
+  // Remove the "Find content" shortcut link
+  $fclid = db_query("SELECT `mlid` FROM {menu_links} WHERE `link_title` = :link_title AND `menu_name` = :menu_name", array(
+    ':link_title' => 'Find content',
+    ':menu_name' => 'shortcut-set-1',
+  ))->fetchField();
+  menu_link_delete($fclid);
+
+  // Add most used links
+  $links = array(
+    // Home and login links in the main menu.
+    array(
+      'link_title' => st('Home'),
+      'link_path' => '<front>',
+      'menu_name' => 'main-menu',
+      'weight' => 0,
+    ),
+    // Shortcut links
+    array(
+      'link_title' => st('Content types'),
+      'link_path' => 'admin/structure/types',
+      'menu_name' => 'shortcut-set-1',
+      'weight' => 1,
+    ),
+    array(
+      'link_title' => st('Views'),
+      'link_path' => 'admin/structure/views',
+      'menu_name' => 'shortcut-set-1',
+      'weight' => 2,
+    ),
+    array(
+      'link_title' => st('Menus'),
+      'link_path' => 'admin/structure/menu',
+      'menu_name' => 'shortcut-set-1',
+      'weight' => 3,
+    ),
+    array(
+      'link_title' => st('Blocks'),
+      'link_path' => 'admin/structure/block',
+      'menu_name' => 'shortcut-set-1',
+      'weight' => 4,
+    ),
+    array(
+      'link_title' => st('Performance'),
+      'link_path' => 'admin/config/development/performance',
+      'menu_name' => 'shortcut-set-1',
+      'weight' => 6,
+    ),
+  );
+  // Save links
+  foreach ($links as $link) {
+    menu_link_save($link);
+  }
+
+  // Update the menu router information.
+  menu_rebuild();
+
+  // Enable the admin theme.
+  db_update('system')
+    ->fields(array('status' => 1))
+    ->condition('type', 'theme')
+    ->condition('name', 'rubik')
+    ->execute();
+  variable_set('admin_theme', 'rubik');
+  variable_set('node_admin_theme', '1');
+
+  // Extend the shortcut limit from 7 to 12 links
+  variable_set('shortcut_max_slots', 12);
+
+  // Switch off the cron
+  variable_set('cron_safe_threshold', 0);
+
+  // Views stuff
+  // Disable "Show advanced help warning"
+  variable_set('views_ui_show_advanced_help_warning', FALSE);
+  // Disable "Automatically update preview on changes"
+  variable_set('views_ui_always_live_preview', FALSE);
+  // Disable "Show information and statistics (...)"
+  variable_set('views_ui_show_preview_information', FALSE);
+
+}

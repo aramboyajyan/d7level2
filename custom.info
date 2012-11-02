@@ -1,0 +1,35 @@
+; ------------------------------------------------------------------------------
+; Installation profile created by Topsitemakers.com
+; http://www.topsitemakers.com
+; ------------------------------------------------------------------------------
+
+; ------------------------------------------------------------------------------
+; Custom installation profile
+; ------------------------------------------------------------------------------
+name = Custom
+description = Custom installation profile with pre-setup environment.
+version = 1.0
+core = 7.x
+
+; ------------------------------------------------------------------------------
+; Core modules
+; ------------------------------------------------------------------------------
+dependencies[] = block
+dependencies[] = image
+dependencies[] = list
+dependencies[] = menu
+dependencies[] = options
+dependencies[] = dblog
+dependencies[] = shortcut
+dependencies[] = toolbar
+dependencies[] = field_ui
+dependencies[] = file
+
+; ------------------------------------------------------------------------------
+; Contributed modules
+; ------------------------------------------------------------------------------
+dependencies[] = devel
+dependencies[] = ctools
+dependencies[] = views
+dependencies[] = views_ui
+dependencies[] = module_filter
