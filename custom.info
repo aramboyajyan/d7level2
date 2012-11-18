@@ -33,3 +33,6 @@ dependencies[] = ctools
 dependencies[] = views
 dependencies[] = views_ui
 dependencies[] = module_filter
+dependencies[] = filefield_sources
+dependencies[] = filefield_sources_plupload
+dependencies[] = plupload
