@@ -14,6 +14,10 @@ Modules added:
 
 Created `libraries` folder and added [plupload](http://plupload.com/) v1.5.4 library.
 
+### June 4, 2013
+
+Updating views, ctools, plupload_filesources and plupload modules to their latest versions.
+
 <hr>
 
 By: [topsitemakers.com](http://www.topsitemakers.com).
