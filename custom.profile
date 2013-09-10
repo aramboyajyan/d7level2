@@ -8,6 +8,11 @@
  * http://www.topsitemakers.com/
  */
 
+/*
+ * Define commons minimum execution time required to operate.
+ */
+define('DRUPAL_MINIMUM_MAX_EXECUTION_TIME', 60);
+
 /**
  * Implements hook_form_FORM_ID_alter() for install_configure_form().
  *
