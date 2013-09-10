@@ -9,6 +9,33 @@
  */
 
 /**
+ * Implements hook_requirements().
+ *
+ * Set minimum 'max_execution_time' requirement.
+ *
+ * Taken from "Drupal Commons" installation profile.
+ */
+function custom_requirements($phase) {
+  $requirements = array();
+  // Ensure translations don't break during installation.
+  $t = get_t();
+  if ($phase == 'install') {
+    // Test PHP minimum execution time
+    $requirements['php_max_execution_time'] = array(
+      'title' => $t('PHP Max Execution Time'),
+      'value' => ini_get('max_execution_time'),
+    );
+    $max_execution_time = (int)ini_get('max_execution_time');
+    // Don't set the error when max_execution_time is 0 (Infinite).
+    if ($max_execution_time && $max_execution_time < DRUPAL_MINIMUM_MAX_EXECUTION_TIME) {
+      $requirements['php_max_execution_time']['description'] = $t('Your PHP execution time is too low, please set it greater than or equal to %time seconds.', array('%time' => DRUPAL_MINIMUM_MAX_EXECUTION_TIME));
+      $requirements['php_max_execution_time']['severity'] = REQUIREMENT_ERROR;
+    }
+  }
+  return $requirements;
+}
+
+/**
  * Implements hook_install().
  */
 function custom_install() {
