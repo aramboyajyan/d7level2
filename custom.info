@@ -38,4 +38,4 @@ dependencies[] = filefield_sources_plupload
 dependencies[] = pathauto
 dependencies[] = plupload
 dependencies[] = rules
-dependencies[] = rules_ui
+dependencies[] = rules_admin
