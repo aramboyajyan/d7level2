@@ -35,6 +35,7 @@ dependencies[] = views_ui
 dependencies[] = module_filter
 dependencies[] = filefield_sources
 dependencies[] = filefield_sources_plupload
+dependencies[] = pathauto
 dependencies[] = plupload
 dependencies[] = rules
 dependencies[] = rules_ui
