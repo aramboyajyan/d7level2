@@ -41,3 +41,4 @@ dependencies[] = libraries
 dependencies[] = plupload
 dependencies[] = rules
 dependencies[] = rules_admin
+dependencies[] = wysiwyg
