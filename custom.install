@@ -175,20 +175,12 @@ function custom_install() {
   // Don't display date and author information for "Basic page" nodes by
   // default.
   variable_set('node_submitted_page', FALSE);
-  // Enable user picture support and set the default to a square thumbnail
-  // option.
-  variable_set('user_pictures', '1');
-  variable_set('user_picture_dimensions', '1024x1024');
-  variable_set('user_picture_file_size', '800');
-  variable_set('user_picture_style', 'thumbnail');
   // Allow visitor account creation with administrative approval.
   variable_set('user_register', USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL);
   // Increase the default number of database log messages to keep.
   variable_get('dblog_row_limit', 1000000);
   // Extend the shortcut limit from 7 to 12 links
   variable_set('shortcut_max_slots', 12);
-  // Disable user pictures.
-  variable_set('user_pictures', FALSE);
   // Switch off the cron.
   variable_set('cron_safe_threshold', 0);
   // Views: disable "Show advanced help warning".
