@@ -184,6 +184,12 @@ function custom_install() {
       'weight' => 4,
     ),
     array(
+      'link_title' => st('PHP'),
+      'link_path' => 'devel/php',
+      'menu_name' => 'shortcut-set-1',
+      'weight' => 5,
+    ),
+    array(
       'link_title' => st('Performance'),
       'link_path' => 'admin/config/development/performance',
       'menu_name' => 'shortcut-set-1',
