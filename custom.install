@@ -13,7 +13,9 @@
  */
 function custom_install() {
 
-  // Enable some standard blocks.
+  /**
+   * Enable standard blocks.
+   */
   $admin_theme = 'rubik';
   $default_theme = variable_get('theme_default', 'bartik');
   $blocks = array(
@@ -105,26 +107,37 @@ function custom_install() {
     node_add_body_field($type);
   }
 
+  /**
+   * Set variables.
+   */
   // Default "Basic page" to not be promoted and have comments disabled.
   variable_set('node_options_page', array('status'));
   variable_set('comment_page', COMMENT_NODE_HIDDEN);
-
   // Don't display date and author information for "Basic page" nodes by
   // default.
   variable_set('node_submitted_page', FALSE);
-
   // Enable user picture support and set the default to a square thumbnail
   // option.
   variable_set('user_pictures', '1');
   variable_set('user_picture_dimensions', '1024x1024');
   variable_set('user_picture_file_size', '800');
   variable_set('user_picture_style', 'thumbnail');
-
   // Allow visitor account creation with administrative approval.
   variable_set('user_register', USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL);
-
   // Increase the default number of database log messages to keep.
   variable_get('dblog_row_limit', 1000000);
+  // Extend the shortcut limit from 7 to 12 links
+  variable_set('shortcut_max_slots', 12);
+  // Disable user pictures.
+  variable_set('user_pictures', FALSE);
+  // Switch off the cron.
+  variable_set('cron_safe_threshold', 0);
+  // Views: disable "Show advanced help warning".
+  variable_set('views_ui_show_advanced_help_warning', FALSE);
+  // Views: disable "Automatically update preview on changes".
+  variable_set('views_ui_always_live_preview', FALSE);
+  // Views: disable "Show information and statistics (...)".
+  variable_set('views_ui_show_preview_information', FALSE);
 
   // Create a default role for site administrators, with all available
   // permissions assigned.
@@ -217,19 +230,5 @@ function custom_install() {
     ->execute();
   variable_set('admin_theme', 'rubik');
   variable_set('node_admin_theme', '1');
-
-  // Extend the shortcut limit from 7 to 12 links
-  variable_set('shortcut_max_slots', 12);
-
-  // Switch off the cron.
-  variable_set('cron_safe_threshold', 0);
-
-  // Views stuff.
-  // Disable "Show advanced help warning".
-  variable_set('views_ui_show_advanced_help_warning', FALSE);
-  // Disable "Automatically update preview on changes".
-  variable_set('views_ui_always_live_preview', FALSE);
-  // Disable "Show information and statistics (...)".
-  variable_set('views_ui_show_preview_information', FALSE);
 
 }
