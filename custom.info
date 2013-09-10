@@ -18,6 +18,7 @@ dependencies[] = block
 dependencies[] = image
 dependencies[] = list
 dependencies[] = menu
+dependencies[] = number
 dependencies[] = options
 dependencies[] = dblog
 dependencies[] = shortcut
