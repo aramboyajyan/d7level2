@@ -216,6 +216,9 @@ function custom_install() {
   variable_set('views_ui_always_live_preview', FALSE);
   // Views: disable "Show information and statistics (...)".
   variable_set('views_ui_show_preview_information', FALSE);
+  // Pathauto: transliterate all URLs prior to creating alias. This is
+  // necessary to avoid accented or non-latin alphabets in URLs.
+  variable_set('pathauto_transliterate', TRUE);
 
   // Create a default role for site administrators, with all available
   // permissions assigned.
