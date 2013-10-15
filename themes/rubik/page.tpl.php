@@ -1,4 +1,3 @@
-<?php if (!empty($admin)) print $admin; ?>
 <div id='branding'><div class='limiter clearfix'>
   <div class='breadcrumb clearfix'><?php print $breadcrumb ?></div>
   <?php if (!$overlay && isset($secondary_menu)) : ?>
