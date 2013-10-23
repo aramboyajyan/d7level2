@@ -219,6 +219,13 @@ function custom_install() {
   // Pathauto: transliterate all URLs prior to creating alias. This is
   // necessary to avoid accented or non-latin alphabets in URLs.
   variable_set('pathauto_transliterate', TRUE);
+  // Pathauto: set custom URL rules for different content types.
+  // These are the default rules applied for all content types without
+  // specific patterns.
+  variable_set('pathauto_node_pattern', '[node:content-type]/[node:title]');
+  // Pages are usually accessible just with the title alias.
+  variable_set('pathauto_node_page_pattern', '[node:title]');
+
 
   // Create a default role for site administrators, with all available
   // permissions assigned.
