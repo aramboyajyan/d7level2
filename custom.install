@@ -249,7 +249,7 @@ function custom_install() {
   user_role_grant_permissions(2, array('access content'));
 
   // Remove the "Find content" shortcut link.
-  $fclid = db_query("SELECT `mlid` FROM {menu_links} WHERE `link_title` = :link_title AND `menu_name` = :menu_name", array(
+  $fclid = db_query("SELECT mlid FROM {menu_links} WHERE link_title = :link_title AND menu_name = :menu_name", array(
     ':link_title' => 'Find content',
     ':menu_name'  => 'shortcut-set-1',
   ))->fetchField();
