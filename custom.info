@@ -23,13 +23,14 @@ dependencies[] = number
 dependencies[] = options
 dependencies[] = dblog
 dependencies[] = shortcut
-dependencies[] = toolbar
 dependencies[] = field_ui
 dependencies[] = file
 
 ; ------------------------------------------------------------------------------
 ; Contributed modules
 ; ------------------------------------------------------------------------------
+dependencies[] = admin_menu
+dependencies[] = adminimal_admin_menu
 dependencies[] = backup_migrate
 dependencies[] = devel
 dependencies[] = ctools
