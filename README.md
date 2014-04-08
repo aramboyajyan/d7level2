@@ -5,7 +5,7 @@ Custom installation profile for quicker development of new Drupal websites.
 The following actions are executed upon installation:
 
 - Text formats created: `Filtered HTML` and `Full HTML`.
-- [Rubik](http://drupal.org/project/rubik) is enabled and set as administrator theme.
+- A simple child theme based on [Rubik](http://drupal.org/project/rubik) is enabled and set as administrator theme. Child theme enables you to make necessary modifications without touching the theme itself.
 - All necessary default blocks (help, content) are assigned to proper regions in both - front-end and back-end themes
 - Node type created: `Page`. Not promoted to front page, hidden author info and with comments disabled.
 - Create new role for administrators and grant all permissions to it.
@@ -26,6 +26,8 @@ The following actions are executed upon installation:
 
 ### Included modules
 
+- [Admin Menu](http://drupal.org/project/admin_menu) with [Adminimal Admin Menu](http://drupal.org/project/adminimal_admin_menu) theme
+- [Backup Migrate](http://drupal.org/project/backup_migrate)
 - [Chaos Tools](http://drupal.org/project/ctools)
 - [Devel](http://drupal.org/project/devel)
 - [Entity](http://drupal.org/project/entity)
