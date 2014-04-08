@@ -292,6 +292,12 @@ function custom_install() {
       'weight'     => 4,
     ),
     array(
+      'link_title' => st('Variables'),
+      'link_path'  => 'devel/variable',
+      'menu_name'  => 'shortcut-set-1',
+      'weight'     => 5,
+    ),
+    array(
       'link_title' => st('PHP'),
       'link_path'  => 'devel/php',
       'menu_name'  => 'shortcut-set-1',
