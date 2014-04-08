@@ -38,3 +38,15 @@ function custom_form_install_configure_form_alter(&$form, $form_state) {
   $form['admin_account']['account']['name']['#default_value'] = 'admin';
   $form['admin_account']['account']['mail']['#default_value'] = $admin_email;
 }
+
+/**
+ * Implements hook_install_tasks_alter().
+ */
+function custom_install_tasks_alter(&$tasks, $install_state){
+  global $install_state;
+  // Skip the language selection screen and set the language to English by
+  // default.
+  $tasks['install_select_locale']['display'] = FALSE;
+  $tasks['install_select_locale']['run']     = INSTALL_TASK_SKIP;
+  $install_state['parameters']['locale']     = 'en';
+}
