@@ -30,6 +30,7 @@ dependencies[] = file
 ; ------------------------------------------------------------------------------
 ; Contributed modules
 ; ------------------------------------------------------------------------------
+dependencies[] = backup_migrate
 dependencies[] = devel
 dependencies[] = ctools
 dependencies[] = views
