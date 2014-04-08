@@ -1,0 +1,20 @@
+
+/**
+ * @file
+ * Modifications stylesheet file.
+ *
+ * Created by: Topsitemakers
+ * http://www.topsitemakers.com/
+ */
+
+/* Regular admin-menu is not as high as the adminimal one. Fix the top body
+margin; otherwise part of the breadcrumbs will be displayed under the dropdown
+menu. */
+body.admin-menu.adminimal-menu {
+  margin-top: 29px !important;
+}
+/* Latest Rubik has a bug where icons in message divs are displayed over the
+text. */
+div.messages {
+  padding-left: 38px!important;
+}

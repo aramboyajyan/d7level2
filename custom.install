@@ -102,7 +102,7 @@ function custom_install() {
   /**
    * Enable standard blocks.
    */
-  $admin_theme = 'rubik';
+  $admin_theme = 'rubik_custom';
   $default_theme = variable_get('theme_default', 'bartik');
   $blocks = array(
     array(
@@ -316,9 +316,9 @@ function custom_install() {
   db_update('system')
     ->fields(array('status' => 1))
     ->condition('type', 'theme')
-    ->condition('name', 'rubik')
+    ->condition('name', 'rubik_custom')
     ->execute();
-  variable_set('admin_theme', 'rubik');
+  variable_set('admin_theme', 'rubik_custom');
   variable_set('node_admin_theme', '1');
 
 }
