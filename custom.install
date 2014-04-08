@@ -327,4 +327,28 @@ function custom_install() {
   variable_set('admin_theme', $admin_theme);
   variable_set('node_admin_theme', '1');
 
+  // Setup private filesystem. Ideally, this should be moved to a folder which
+  // is not accessible over the web after initial installation.
+  $private_directory = 'sites/default/files/private';
+  variable_set('file_private_path', $private_directory);
+  file_create_htaccess($private_directory);
+
+  // Create a new backup and migrate schedule.
+  db_insert('backup_migrate_schedules')
+    ->fields(array(
+      // Generate schedule ID using the same mechanism as in the backup_migrate
+      // module itself.
+      'schedule_id'    => md5(uniqid(mt_rand(), true)),
+      'name'           => 'Daily backup',
+      'source_id'      => 'db',
+      'destination_id' => 'scheduled',
+      'profile_id'     => 'default',
+      'keep'           => 0,
+      // Every day.
+      'period'         => 24 * 60 * 60,
+      'enabled'        => 1,
+      'cron'           => 0,
+    ))
+    ->execute();
+
 }
