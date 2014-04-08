@@ -316,9 +316,9 @@ function custom_install() {
   db_update('system')
     ->fields(array('status' => 1))
     ->condition('type', 'theme')
-    ->condition('name', 'rubik_custom')
+    ->condition('name', $admin_theme)
     ->execute();
-  variable_set('admin_theme', 'rubik_custom');
+  variable_set('admin_theme', $admin_theme);
   variable_set('node_admin_theme', '1');
 
 }
