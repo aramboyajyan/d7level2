@@ -406,7 +406,7 @@ function wysiwyg_ckeditor_settings($editor, $config, $theme) {
   // Parse and define the styles set for the Styles plugin (3.2.1+).
   // @todo This should be a plugin setting, but Wysiwyg does not support
   //   plugin-specific settings yet.
-  if (!empty($config['buttons']['default']['Styles']) && version_compare($editor['installed version'], '3.2.1', '>=')) {
+  if (!empty($config['buttons']['default']['Styles']) && version_compare($editor['installed version'], '3.2.1', '>=') && !empty($config['stylesSet'])) {
     if ($styles = wysiwyg_ckeditor_settings_parse_styles($config['stylesSet'])) {
       $settings['stylesSet'] = $styles;
     }
@@ -583,9 +583,10 @@ function wysiwyg_ckeditor_proxy_plugin_settings($editor, $profile, $plugins) {
       'title' => $plugin['title'],
       'icon' => base_path() . $plugin['icon path'] . '/' . $plugin['icon file'],
       'iconTitle' => $plugin['icon title'],
-      // @todo These should only be set if the plugin defined them.
-      'css' => base_path() . $plugin['css path'] . '/' . $plugin['css file'],
     );
+    if (!empty($plugin['css path']) && !empty($plugin['css file'])) {
+      $settings[$name]['css'] = base_path() . $plugin['css path'] . '/' . $plugin['css file'];
+    }
   }
   return $settings;
 }
