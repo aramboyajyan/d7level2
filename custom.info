@@ -16,6 +16,7 @@ exclusive = TRUE
 ; Core modules
 ; ------------------------------------------------------------------------------
 dependencies[] = block
+dependencies[] = contextual
 dependencies[] = image
 dependencies[] = list
 dependencies[] = menu
