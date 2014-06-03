@@ -32,6 +32,7 @@ function custom_requirements($phase) {
       $requirements['php_max_execution_time']['severity'] = REQUIREMENT_ERROR;
     }
   }
+
   return $requirements;
 }
 
