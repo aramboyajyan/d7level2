@@ -13,11 +13,6 @@ menu. See https://drupal.org/node/2239169 */
 body.admin-menu.adminimal-menu {
   margin-top: 29px !important;
 }
-/* Latest Rubik has a bug where icons in message divs are displayed over the
-text. */
-div.messages {
-  padding-left: 38px!important;
-}
 /* Force images to have the maximum width of parent container. See 
 https://drupal.org/node/2239165 */
 #page img {
