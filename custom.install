@@ -270,6 +270,8 @@ function custom_install() {
   variable_set('pathauto_node_page_pattern', '[node:title]');
   // Change the default JPEG image quality to 90%.
   variable_set('image_jpeg_quality', 90);
+  // Change update notification threshold to only security updates.
+  variable_set('update_notification_threshold', 'security');
 
   // Create a default role for site administrators, with all available
   // permissions assigned.
