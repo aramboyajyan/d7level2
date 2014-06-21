@@ -225,7 +225,7 @@ function custom_install() {
   // These are the default rules applied for all content types without
   // specific patterns.
   variable_set('pathauto_node_pattern', '[node:content-type]/[node:title]');
-  // Pages are usually accessible just with the title alias.
+  // Pages should usually be accessible just with the title alias.
   variable_set('pathauto_node_page_pattern', '[node:title]');
   // Change the default JPEG image quality to 90%.
   variable_set('image_jpeg_quality', 90);
@@ -248,46 +248,6 @@ function custom_install() {
   // Allow anonymous and registered users to access content.
   user_role_grant_permissions(1, array('access content'));
   user_role_grant_permissions(2, array('access content'));
-
-  // Remove the "Find content" shortcut link.
-  $fclid = db_query("SELECT mlid FROM {menu_links} WHERE link_title = :link_title AND menu_name = :menu_name", array(
-    ':link_title' => 'Find content',
-    ':menu_name'  => 'shortcut-set-1',
-  ))->fetchField();
-  menu_link_delete($fclid);
-
-  /**
-   * Add most used links.
-   */
-  $links = array(
-    // Home link in the main menu.
-    array(
-      'link_title' => st('Home'),
-      'link_path'  => '<front>',
-      'menu_name'  => 'main-menu',
-      'weight'     => 0,
-    ),
-    // Shortcut links.
-    array(
-      'link_title' => st('PHP'),
-      'link_path'  => 'devel/php',
-      'menu_name'  => 'shortcut-set-1',
-      'weight'     => 5,
-    ),
-    array(
-      'link_title' => st('Variables'),
-      'link_path'  => 'devel/variable',
-      'menu_name'  => 'shortcut-set-1',
-      'weight'     => 5,
-    ),
-  );
-  // Save links.
-  foreach ($links as $link) {
-    menu_link_save($link);
-  }
-
-  // Update the menu router information.
-  menu_rebuild();
 
   // Enable the admin theme.
   db_update('system')

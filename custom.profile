@@ -14,6 +14,63 @@
 define('DRUPAL_MINIMUM_MAX_EXECUTION_TIME', 60);
 
 /**
+ * Implements hook_install_tasks().
+ */
+function custom_install_tasks($install_state) {
+  $tasks = array();
+  $tasks['custom_task_add_menu_items'] = array(
+    'type' => 'normal',
+    'run' => INSTALL_TASK_RUN_IF_REACHED,
+  );
+
+  return $tasks;
+}
+
+/**
+ * Add most used links.
+ */
+function custom_task_add_menu_items() {
+  // Remove all default shortcut links because they are useless.
+  $shortcut_links = db_select('menu_links', 'l')
+    ->fields('l', array('mlid'))
+    ->condition('menu_name', 'shortcut-set-1')
+    ->execute()
+    ->fetchAll();
+  foreach ($shortcut_links as $shortcut_link) {
+    menu_link_delete($shortcut_link->mlid);
+  }
+  // Configure the links we will add to other menus (main menu and shortcut).
+  $links = array(
+    // Home link in the main menu.
+    array(
+      'link_title' => st('Home'),
+      'link_path'  => '<front>',
+      'menu_name'  => 'main-menu',
+      'weight'     => 0,
+    ),
+    array(
+      'link_title' => st('PHP'),
+      'link_path'  => 'devel/php',
+      'menu_name'  => 'shortcut-set-1',
+      'weight'     => 0,
+    ),
+    array(
+      'link_title' => st('Variables'),
+      'link_path'  => 'devel/variable',
+      'menu_name'  => 'shortcut-set-1',
+      'weight'     => 1,
+    ),
+  );
+  // Save links.
+  foreach ($links as $link) {
+    menu_link_save($link);
+  }
+
+  // Update the menu router information.
+  menu_rebuild();
+}
+
+/**
  * Implements hook_form_FORM_ID_alter() for install_configure_form().
  *
  * Allows the profile to alter the site configuration form.
