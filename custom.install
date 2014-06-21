@@ -298,65 +298,40 @@ function custom_install() {
   variable_set('admin_theme', $admin_theme);
   variable_set('node_admin_theme', '1');
 
-  // Setup private filesystem. Ideally, this should be moved to a folder which
-  // is not accessible over the web after initial installation.
   $private_directory = 'sites/default/files/private';
+  // First, create the folder.
+  drupal_mkdir($private_directory, NULL, TRUE);
+  drupal_chmod($private_directory);
+  // Setup private filesystem.
   variable_set('file_private_path', $private_directory);
   file_create_htaccess($private_directory);
-
-  // Create new backup and migrate destinations for weekly and daily backups.
-  $weekly_destination_id = md5(uniqid(mt_rand(), TRUE));
+  // Create backup_migrate destinations.
+  $common_settings = serialize(array('chmod' => '', 'chgrp' => ''));
+  // Directory for DB backups.
   db_insert('backup_migrate_destinations')
     ->fields(array(
-      'destination_id' => $weekly_destination_id,
-      'name'           => 'Weekly backup',
-      'type'           => 'file',
-      'location'       => 'private://backup_migrate_scheduled-weekly',
-      'settings'       => serialize(array('chmod' => '', 'chgrp' => '')),
-    ))
-    ->execute();
-  $daily_destination_id = md5(uniqid(mt_rand(), TRUE));
-  db_insert('backup_migrate_destinations')
-    ->fields(array(
-      'destination_id' => $daily_destination_id,
-      'name'           => 'Daily backup',
-      'type'           => 'file',
-      'location'       => 'private://backup_migrate_scheduled-daily',
-      'settings'       => serialize(array('chmod' => '', 'chgrp' => '')),
+      'machine_name' => 'scheduled_db',
+      'name' => 'Directory for DB backups',
+      'subtype' => 'file',
+      'location' => 'private://backup_migrate/scheduled_database',
+      'settings' => $common_settings,
     ))
     ->execute();
 
-  // Create new backup and migrate schedules.
+  // Routine DB schedule.
   db_insert('backup_migrate_schedules')
     ->fields(array(
-      // Generate schedule ID using the same mechanism as in the backup_migrate
-      // module itself.
-      'schedule_id'    => md5(uniqid(mt_rand(), TRUE)),
-      'name'           => 'Weekly backup',
-      'source_id'      => 'db',
-      'destination_id' => $weekly_destination_id,
-      'profile_id'     => 'default',
-      'keep'           => 0,
-      // Every day.
-      'period'         => 7 * 24 * 60 * 60,
-      'enabled'        => 1,
-      'cron'           => 0,
-    ))
-    ->execute();
-  db_insert('backup_migrate_schedules')
-    ->fields(array(
-      // Generate schedule ID using the same mechanism as in the backup_migrate
-      // module itself.
-      'schedule_id'    => md5(uniqid(mt_rand(), TRUE)),
-      'name'           => 'Daily backup',
-      'source_id'      => 'db',
-      'destination_id' => $daily_destination_id,
-      'profile_id'     => 'default',
-      'keep'           => 30,
-      // Every week.
-      'period'         => 24 * 60 * 60,
-      'enabled'        => 1,
-      'cron'           => 0,
+      'machine_name' => 'routine_db_schedule',
+      'name' => 'Routine DB schedule',
+      'source_id' => 'db',
+      'destination_id' => 'scheduled_db',
+      'copy_destination_id' => '',
+      'profile_id' => 'default',
+      'keep' => -2,
+      'period' => 24 * 60  * 60,
+      'enabled' => TRUE,
+      'cron' => 'builtin',
+      'cron_schedule' => '0 4 * * *',
     ))
     ->execute();
 
