@@ -7,14 +7,4 @@
  * http://www.topsitemakers.com/
  */
 
-/* Regular admin-menu is not as high as the adminimal one. Fix the top body
-margin; otherwise part of the breadcrumbs will be displayed under the dropdown
-menu. See https://drupal.org/node/2239169 */
-body.admin-menu.adminimal-menu {
-  margin-top: 29px !important;
-}
-/* Force images to have the maximum width of parent container. See 
-https://drupal.org/node/2239165 */
-#page img {
-  max-width: 100%;
-}
+
