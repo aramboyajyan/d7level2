@@ -18,7 +18,7 @@ The following actions are executed upon installation:
 - Increase the default number of database log messages to 1.000.000.
 - Extend the shortcut limit from 7 to 12 links.
 - Switch off automatic cron run, triggered during regular page loads.
-- ViewsViews: disable "Show advanced help warning".
+- Views: disable "Show advanced help warning".
 - Views: disable "Automatically update preview on changes".
 - Views: disable "Show information and statistics (...)".
 - Pathauto: transliterate all URLs prior to creating alias.
