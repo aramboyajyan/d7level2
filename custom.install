@@ -74,6 +74,20 @@ function custom_install() {
   );
   $filtered_html_format = (object) $filtered_html_format;
   filter_format_save($filtered_html_format);
+  // Update allowed tags for Filtered HTML to include paragraphs and breaklines.
+  $filter_html_settings = db_select('filter', 'f')
+    ->fields('f', array('settings'))
+    ->condition('format', 'filtered_html')
+    ->condition('name', 'filter_html')
+    ->execute()
+    ->fetchField();
+  $filter_html_settings = unserialize($filter_html_settings);
+  $filter_html_settings['allowed_html'] .= ' <br> <p>';
+  db_update('filter')
+    ->fields(array('settings' => serialize($filter_html_settings)))
+    ->condition('format', 'filtered_html')
+    ->condition('name', 'filter_html')
+    ->execute();
   // Full HTML text format.
   $full_html_format = array(
     'format' => 'full_html',
