@@ -269,46 +269,16 @@ function custom_install() {
     ),
     // Shortcut links.
     array(
-      'link_title' => st('Content types'),
-      'link_path'  => 'admin/structure/types',
-      'menu_name'  => 'shortcut-set-1',
-      'weight'     => 1,
-    ),
-    array(
-      'link_title' => st('Views'),
-      'link_path'  => 'admin/structure/views',
-      'menu_name'  => 'shortcut-set-1',
-      'weight'     => 2,
-    ),
-    array(
-      'link_title' => st('Menus'),
-      'link_path'  => 'admin/structure/menu',
-      'menu_name'  => 'shortcut-set-1',
-      'weight'     => 3,
-    ),
-    array(
-      'link_title' => st('Blocks'),
-      'link_path'  => 'admin/structure/block',
-      'menu_name'  => 'shortcut-set-1',
-      'weight'     => 4,
-    ),
-    array(
-      'link_title' => st('Variables'),
-      'link_path'  => 'devel/variable',
-      'menu_name'  => 'shortcut-set-1',
-      'weight'     => 5,
-    ),
-    array(
       'link_title' => st('PHP'),
       'link_path'  => 'devel/php',
       'menu_name'  => 'shortcut-set-1',
       'weight'     => 5,
     ),
     array(
-      'link_title' => st('Performance'),
-      'link_path'  => 'admin/config/development/performance',
+      'link_title' => st('Variables'),
+      'link_path'  => 'devel/variable',
       'menu_name'  => 'shortcut-set-1',
-      'weight'     => 6,
+      'weight'     => 5,
     ),
   );
   // Save links.
