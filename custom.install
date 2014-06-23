@@ -272,6 +272,8 @@ function custom_install() {
   variable_set('image_jpeg_quality', 90);
   // Change update notification threshold to only security updates.
   variable_set('update_notification_threshold', 'security');
+  // Set Monday as first day of the week.
+  variable_set('date_first_day', 1);
 
   // Create a default role for site administrators, with all available
   // permissions assigned.
