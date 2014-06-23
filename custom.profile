@@ -132,6 +132,8 @@ function custom_form_install_configure_form_alter(&$form, $form_state) {
   // Set the default admin username and email address.
   $form['admin_account']['account']['name']['#default_value'] = 'admin';
   $form['admin_account']['account']['mail']['#default_value'] = $admin_email;
+  // Set default country to US.
+  $form['server_settings']['site_default_country']['#default_value'] = 'US';
 }
 
 /**
