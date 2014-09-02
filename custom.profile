@@ -85,6 +85,7 @@ function custom_task_add_default_pages() {
   node_object_prepare($page);
   $page->status = NODE_PUBLISHED;
   $page->uid = 1;
+  $page->body[LANGUAGE_NONE][0]['format'] = 'filtered_html';
   // Home page.
   $home = clone $page;
   $home->title = 'Home';
@@ -93,12 +94,10 @@ function custom_task_add_default_pages() {
   $access_denied = clone $page;
   $access_denied->title = 'Access Denied';
   $access_denied->body[LANGUAGE_NONE][0]['value'] = t('You do not have enough permissions to access this page. Please <a href="@login">login</a> to continue.', array('@login' => url('user/login')));
-  $access_denied->body[LANGUAGE_NONE][0]['format'] = 'full_html';
   // 404.
   $not_found = clone $page;
   $not_found->title = 'Page Not Found';
   $not_found->body[LANGUAGE_NONE][0]['value'] = t('The page you requested has not been found. Click <a href="@home">here</a> to go back to the home page.', array('@home' => url('<front>')));
-  $not_found->body[LANGUAGE_NONE][0]['format'] = 'full_html';
   // Save pages.
   node_save($home);
   node_save($access_denied);
