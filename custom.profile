@@ -81,6 +81,7 @@ function custom_task_add_default_pages() {
   // Common details.
   $page = new stdClass();
   $page->type = 'page';
+  $page->language = LANGUAGE_NONE;
   node_object_prepare($page);
   $page->status = NODE_PUBLISHED;
   $page->uid = 1;
