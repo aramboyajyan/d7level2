@@ -46,7 +46,7 @@ The following actions are executed upon installation:
 
 ### Included themes
 
-- [Rubik admin theme](http://drupal.org/project/rubik)
+- [Rubik admin theme](http://drupal.org/project/rubik). Note: the profile will automatically use a custom child theme of Rubik, to make any necessary modifications easier.
 - [Tao base theme](http://drupal.org/project/tao) (required by Rubik)
 
 <hr>
