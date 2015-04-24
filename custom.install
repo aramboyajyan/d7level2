@@ -274,6 +274,10 @@ function custom_install() {
   variable_set('update_notification_threshold', 'security');
   // Set Monday as first day of the week.
   variable_set('date_first_day', 1);
+  // Module filter: do not use URL fragment.
+  variable_set('module_filter_use_url_fragment', FALSE);
+  // Module filter: do not remember last active tab.
+  variable_set('module_filter_remember_active_tab', FALSE);
 
   // Create a default role for site administrators, with all available
   // permissions assigned.
