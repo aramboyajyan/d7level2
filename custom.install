@@ -344,4 +344,26 @@ function custom_install() {
     ))
     ->execute();
 
+  // Update CKEditor settings. The options are stored as serialized strings, so
+  // we have to load them first.
+  // See http://stackoverflow.com/a/27787825/1678407 for more information.
+  $ckeditor_advanced = db_query("SELECT settings FROM {ckeditor_settings} WHERE name = 'Advanced'")->fetchField();
+  $ckeditor_advanced = unserialize($ckeditor_advanced);
+  $ckeditor_full = db_query("SELECT settings FROM {ckeditor_settings} WHERE name = 'Full'")->fetchField();
+  $ckeditor_full = unserialize($ckeditor_full);
+  // Update the advanced settings, so CKEditor does not remove empty elements,
+  // as well as element attributes.
+  $settings  = 'config.allowedContent = true;' . PHP_EOL;
+  $settings .= "config.extraAllowedContent = 'p(*)[*]{*};div(*)[*]{*};li(*)[*]{*};ul(*)[*]{*}';" . PHP_EOL;
+  $settings .= 'CKEDITOR.dtd.$removeEmpty.i = 0;';
+  $ckeditor_advanced['js_conf'] = $settings;
+  $ckeditor_full['js_conf'] = $settings;
+  // Update this in the database.
+  db_query("UPDATE {ckeditor_settings} SET settings = :settings WHERE name = 'Advanced'", array(
+    ':settings' => serialize($ckeditor_advanced),
+  ));
+  db_query("UPDATE {ckeditor_settings} SET settings = :settings WHERE name = 'Full'", array(
+    ':settings' => serialize($ckeditor_full),
+  ));
+
 }
