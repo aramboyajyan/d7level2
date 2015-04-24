@@ -265,7 +265,7 @@ function custom_install() {
   // Pathauto: set custom URL rules for different content types.
   // These are the default rules applied for all content types without
   // specific patterns.
-  variable_set('pathauto_node_pattern', '[node:content-type]/[node:title]');
+  variable_set('pathauto_node_pattern', '[node:content-type]/[node:nid]/[node:title]');
   // Pages should usually be accessible just with the title alias.
   variable_set('pathauto_node_page_pattern', '[node:title]');
   // Change the default JPEG image quality to 90%.
