@@ -291,6 +291,7 @@ ul.secondary-tabs li a {
   float: none;
   height: auto;
   text-align: left;
+  margin-bottom: 0;
 }
 .secondary-tabs a {
   color: #fff;
