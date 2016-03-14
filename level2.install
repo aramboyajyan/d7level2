@@ -15,7 +15,7 @@
  *
  * Taken from "Drupal Commons" installation profile.
  */
-function custom_requirements($phase) {
+function level2_requirements($phase) {
   $requirements = array();
   // Ensure translations don't break during installation.
   $t = get_t();
@@ -39,7 +39,7 @@ function custom_requirements($phase) {
 /**
  * Implements hook_install().
  */
-function custom_install() {
+function level2_install() {
 
   /**
    * Add custom text formats.
