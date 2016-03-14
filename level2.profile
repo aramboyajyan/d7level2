@@ -8,7 +8,7 @@
  * http://www.topsitemakers.com/
  */
 
-/*
+/**
  * Define minimum execution time required to operate.
  */
 define('DRUPAL_MINIMUM_MAX_EXECUTION_TIME', 60);
@@ -123,7 +123,7 @@ function level2_form_install_configure_form_alter(&$form, $form_state) {
   if (!strpos($server_name, '.')) {
     $server_name = $server_name . '.com';
   }
-  $admin_email = 'admin@' . $server_name;
+  $admin_email = 'webmaster@' . $server_name;
 
   // Pre-populate the site name with the server name.
   $form['site_information']['site_name']['#default_value'] = $_SERVER['SERVER_NAME'];
