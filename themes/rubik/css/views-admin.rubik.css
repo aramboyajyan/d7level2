@@ -22,9 +22,6 @@
      -moz-box-shadow: none;
           box-shadow: none;
 }
-#ctools-button-9 {
-   z-index: 1;
-}
 #views-ui-edit-form div#edit-actions.form-actions.form-wrapper {
    float: right;
 }
@@ -45,6 +42,15 @@
 }
 #views-ui-edit-form .views-display-top ul.secondary.tabs {
   overflow: inherit;
+  padding-bottom: 0;
+  padding-left: 0;
+}
+#views-ui-edit-form .views-display-top ul.secondary.tabs li {
+  margin-bottom: 0;
+  margin: 0 10px 0 0;
+}
+#views-ui-edit-form .views-display-top ul.secondary.tabs li a.active {
+  border-color: #666;
 }
 #views-ui-edit-form .pager {
   margin: 0;
@@ -218,6 +224,10 @@ select.form-select:focus {
 .views-ui-dialog .scroll {
   border: none;
   padding: 8px 10px 8px 0;
+}
+/* Force the Views UI operations table cell to have relative positioning. */
+td.views-ui-operations {
+  position: relative;
 }
 /* Form buttons. */
 .views-ui-dialog .form-buttons {

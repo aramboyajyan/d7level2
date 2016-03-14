@@ -246,18 +246,26 @@ div.pager {
   background-color: #f8f8f8;
 }
 .pager li:first-child,
-.primary-tabs li:first-child {
+.primary-tabs li.first-row-link {
+  background-position: 0% 0;
   -webkit-border-radius: 5px 0 0 5px;
      -moz-border-radius: 5px 0 0 5px;
           border-radius: 5px 0 0 5px;
-  background-position: 0% 0;
 }
 .pager li:last-child,
-.primary-tabs li:last-child {
+.primary-tabs li.last-row-link {
+  background-position: 100% 0;
   -webkit-border-radius: 0 5px 5px 0;
      -moz-border-radius: 0 5px 5px 0;
           border-radius: 0 5px 5px 0;
-  background-position: 100% 0;
+}
+/* This style is necessary in case there is only one tab that goes to the
+second row. */
+.primary-tabs li.first-row-link.last-row-link {
+  background-position: 0% 0;
+  -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+          border-radius: 5px;
 }
 .pager li.pager-current,
 .primary-tabs li.active {
@@ -457,6 +465,43 @@ div.views-exposed-form input.form-text,
 div.views-exposed-form input.form-autocomplete {
   height: 28px;
 }
+/* Views grouped filters in admin. */
+#views-ajax-body .scroll.form-wrapper > *:not(.tabledrag-toggle-weight-wrapper) {
+  float: left;
+  width: 100%;
+  /* It's horrible to do this, but it's the best option for now. */
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+#views-ajax-body .tabledrag-toggle-weight-wrapper {
+  position: relative;
+}
+#views-ajax-body .scroll.form-wrapper table {
+  float: none;
+}
+#views-ajax-body .scroll.form-wrapper > .views-left-40 {
+  width: 40%;
+}
+#views-ajax-body .scroll.form-wrapper > .views-right-60 {
+  width: 59%;
+  float: right;
+}
+#views-ajax-body #edit-options-more {
+  margin-top: 10px;
+}
+/* Views header on administrative pages (displayed while editing a view). */
+.views-display-top {
+  padding: 10px;
+}
+/* CTools toggle in views display columns. This is displayed while editing or
+creating a view. */
+.views-display-column > .ctools-toggle {
+  margin-top: 14px;
+}
+.views-display-column > .ctools-toggle.ctools-toggle-collapsed {
+  margin-top: 11px;
+}
 /* Module filter "clear" link. */
 .module-filter-clear a {
   margin: 3px 0 0 -35px;
@@ -481,5 +526,13 @@ div.views-exposed-form input.form-autocomplete {
 .view-workbench-moderation tbody .views-field-moderation-actions li a:hover {
   background-color: #52a8be;
   color: #fff;
+}
+/* Make sure that OpenLayers maps are displayed. */
+#page img.olTileImage {
+  max-width: inherit;
+}
+/* Use monospace font on devel/php form. */
+#devel-execute-form textarea {
+  font-family: monospace;
 }
 /* Fixes for other modules end */

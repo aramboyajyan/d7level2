@@ -32,3 +32,10 @@ settings[rubik_show_branding] = 1
 ; Out of all default Drupal theme features, Rubik uses only secondary menu which
 ; is displayed at the top of the page, in #branding section.
 features[] = secondary_menu
+
+; Information added by Drupal.org packaging script on 2016-03-05
+version = "7.x-4.4"
+core = "7.x"
+project = "rubik"
+datestamp = "1457209443"
+

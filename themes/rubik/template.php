@@ -17,6 +17,9 @@ function rubik_preprocess_html(&$vars) {
     'every_page' => TRUE,
   ));
 
+  // Disable sticky in the sidebar. Set option in JS
+  $disable_sticky = theme_get_setting('rubik_disable_sticky_sidebar');
+  drupal_add_js(array('rubik' => array('disable_sticky' => $disable_sticky)), array('type' => 'setting'));
 }
 
 /**
@@ -140,11 +143,6 @@ function rubik_preprocess_page(&$vars) {
 
   // Overlay is enabled.
   $vars['overlay'] = (module_exists('overlay') && overlay_get_mode() === 'child');
-
-  // Disable sticky in the sidebar. Set option in JS
-  $disable_sticky = theme_get_setting('rubik_disable_sticky_sidebar');
-  drupal_add_js(array('rubik' => array('disable_sticky' => $disable_sticky)), array('type' => 'setting'));
-
 }
 
 /**
